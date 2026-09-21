@@ -1,0 +1,137 @@
+<!doctype html>
+<!--
+  الرابط الذكي لتطبيق «قبس»:  https://firask86-bit.github.io/ScholarQuotes/app/
+
+  رابط واحد يُطبع مع كل بطاقة مشاركة. الآيفون يُحوَّل إلى App Store،
+  والأندرويد إلى Google Play، والحاسوب يرى الصفحة بزرَّيها.
+
+  وسوم og:* هي ما يرسمه واتساب وتيليجرام معاينةً للرابط — بدونها يظهر
+  الرابط نصًّا مجرّدًا، ومعها بطاقة بصورة التطبيق واسمه.
+-->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>قبس — من أقوال العلماء والدعاة</title>
+<meta name="description" content="مجموعة مختارة من أقوال العلماء والدعاة، موثّقة من مصادرها، في تطبيق هادئ للقراءة والتأمّل. مجاني على iPhone و Android.">
+<meta name="theme-color" content="#0f2b33">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:site_name" content="قبس">
+<meta property="og:title" content="قبس — من أقوال العلماء والدعاة">
+<meta property="og:description" content="أقوال موثّقة من مصادرها، قول كل يوم، وبطاقات جميلة للمشاركة. مجاني على iPhone و Android.">
+<meta property="og:url" content="https://firask86-bit.github.io/ScholarQuotes/app/">
+<meta property="og:image" content="https://firask86-bit.github.io/ScholarQuotes/app/og.jpg">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://firask86-bit.github.io/ScholarQuotes/app/og.jpg">
+
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<!-- Smart App Banner: Safari on iPhone shows a native «Open / Get» bar. -->
+<meta name="apple-itunes-app" content="app-id=815335631">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+<script>
+  // Route phones straight to their store. Runs before first paint so the page
+  // only flashes, if at all — the buttons below are the fallback, not the path.
+  (function () {
+    var ua = navigator.userAgent || '';
+    var ios = /iPhone|iPad|iPod/i.test(ua) ||
+      // iPadOS 13+ reports itself as a Mac with touch.
+      (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+    var android = /Android/i.test(ua);
+    var target = ios
+      ? 'https://apps.apple.com/app/id815335631'
+      : android
+        ? 'https://play.google.com/store/apps/details?id=com.newscholarquotes'
+        : null;
+    // `?stay` keeps a phone on the page — for checking it, and for anyone
+    // who wants to read before going to the store.
+    if (target && location.search.indexOf('stay') === -1) {
+      location.replace(target);
+    }
+  })();
+</script>
+
+<style>
+  :root {
+    --bg: #0f2b33;
+    --bg-deep: #0b1f25;
+    --card: #14353f;
+    --gold: #e8c268;
+    --gold-ink: #c99a3e;
+    --text: #f6efdd;
+    --muted: #b9c6c2;
+    --line: rgba(232, 194, 104, 0.28);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    background: radial-gradient(120% 70% at 50% 0%, #16404a 0%, var(--bg) 45%, var(--bg-deep) 100%);
+    color: var(--text);
+    font-family: 'Tajawal', system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px calc(32px + env(safe-area-inset-bottom));
+  }
+  main { width: 100%; max-width: 420px; text-align: center; }
+  .icon {
+    width: 112px; height: 112px; border-radius: 26px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--line);
+  }
+  h1 {
+    font-family: 'Amiri', serif; font-weight: 700;
+    font-size: 44px; line-height: 1.2; margin: 22px 0 4px; color: var(--gold);
+  }
+  .tagline { font-size: 17px; color: var(--text); margin: 0; }
+  .rule {
+    display: flex; align-items: center; gap: 10px;
+    margin: 22px auto; width: 70%; color: var(--gold-ink);
+  }
+  .rule::before, .rule::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .about { font-size: 15px; line-height: 1.9; color: var(--muted); margin: 0 0 26px; }
+  .stores { display: grid; gap: 12px; }
+  .store {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 15px 18px; border-radius: 14px;
+    background: var(--card); border: 1px solid var(--line);
+    color: var(--text); text-decoration: none; font-size: 17px; font-weight: 700;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .store:hover, .store:focus-visible { border-color: var(--gold); outline: none; transform: translateY(-1px); }
+  .store span { direction: ltr; }
+  .free { margin-top: 18px; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <img class="icon" src="icon.png" alt="أيقونة تطبيق قبس" width="112" height="112">
+  <h1>قبس</h1>
+  <p class="tagline">من أقوال العلماء والدعاة</p>
+  <div class="rule" aria-hidden="true">◆</div>
+  <p class="about">
+    أقوال مختارة موثّقة من مصادرها، وقولٌ جديد كل يوم،
+    وبطاقات جميلة تشاركها مع من تحب.
+  </p>
+
+  <div class="stores">
+    <a class="store" href="https://apps.apple.com/app/id815335631">
+      <span>App Store</span>
+    </a>
+    <a class="store" href="https://play.google.com/store/apps/details?id=com.newscholarquotes">
+      <span>Google Play</span>
+    </a>
+  </div>
+
+  <p class="free">مجاني على iPhone و Android</p>
+</main>
+</body>
+</html>
