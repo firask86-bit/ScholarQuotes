@@ -46,11 +46,34 @@
       // iPadOS 13+ reports itself as a Mac with touch.
       (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
     var android = /Android/i.test(ua);
+    var platform = ios ? 'ios' : android ? 'android' : 'other';
     var target = ios
-      ? 'https://apps.apple.com/app/id815335631'
+      ? 'https://apps.apple.com/app/id815335631?ct=qabas_link&mt=8'
       : android
-        ? 'https://play.google.com/store/apps/details?id=com.newscholarquotes'
+        ? 'https://play.google.com/store/apps/details?id=com.newscholarquotes' +
+          '&referrer=' + encodeURIComponent('utm_source=qabas_link&utm_medium=share_card')
         : null;
+
+    // Count the opening before leaving. GitHub Pages keeps no log, and the
+    // stores only ever report installs — this is the only way to see how many
+    // people the shared cards actually reach. `keepalive` is what lets the
+    // request outlive the navigation below, so nothing is delayed for it.
+    // Nothing identifying is sent: the moment, the platform, and the ‎?s=‎ tag
+    // you put on the link yourself.
+    try {
+      var tag = new URLSearchParams(location.search).get('s');
+      fetch('https://sutctzacokyzuczlawbj.supabase.co/rest/v1/link_hits', {
+        method: 'POST',
+        keepalive: true,
+        headers: {
+          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1dGN0emFjb2t5enVjemxhd2JqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY2OTg0OTcsImV4cCI6MjEwMjI3NDQ5N30.59es6XJ6juomYFp3XEM4Tekf-TpzKklnPdPFlxd39XA',
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ platform: platform, source: tag ? tag.slice(0, 40) : null })
+      }).catch(function () {});
+    } catch (e) { /* العدّاد لا يعطّل التحميل أبدًا */ }
+
     // `?stay` keeps a phone on the page — for checking it, and for anyone
     // who wants to read before going to the store.
     if (target && location.search.indexOf('stay') === -1) {
